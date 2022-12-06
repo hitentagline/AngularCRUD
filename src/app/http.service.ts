@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,16 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getMethod() {
-    return this.http.get(this.url);
+  getMethod(): Observable<any> {
+    // const header = new HttpHeaders()
+    //   .set('Token', 'Hiten 9090909090')
+    //   .set('Content-Type', 'Application/json');
+
+    let header = new HttpHeaders()
+    header = header.set('content-set','hiten')
+    header = header.append('content-append','hiten');
+
+    return this.http.get(this.url, { headers: header});
   }
 
   getSingle(id:any) {
